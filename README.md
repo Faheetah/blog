@@ -1,19 +1,24 @@
 # Blog
 
-To start your Phoenix server:
+A generic blog written in Elixir
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Deploying
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Create a systemd file with the following information:
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+```
+WorkingDirectory=/path/to/application
+ExecStartPre=/path/to/application/bin/blog eval 'Blog.Release.migrate'
+ExecStart=/path/to/application/bin/blog start
+ExecStop=/path/to/application/bin/blog stop
+EnvironmentFile=/path/to/secrets
+Environment=LANG=en_US.utf8
+Environment=MIX_ENV=prod
+```
 
-## Learn more
+The `secrets` file should look similar to
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```
+DATABASE_URL='ecto://username:password@localhost:5432/blog'
+SECRET_KEY_BASE='value created with mix phx.gen.secret'
+```
