@@ -1,4 +1,4 @@
-<h1>Log in</h1>
+<div class="text-4xl mb-4">Log in</div>
 
 <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
   <%= if @error_message do %>
@@ -7,20 +7,30 @@
     </div>
   <% end %>
 
-  <%= label f, :username %>
-  <%= text_input f, :username, required: true %>
+  <div class="grid grid-cols-12 gap-3">
+    <div class="col-span-3 text-right font-bold">
+      <%= label f, :username %>
+    </div>
+    <div class="col-span-9">
+      <%= text_input f, :username, required: true, class: "w-1/3 px-2 p-1 border border-black rounded" %>
+    </div>
 
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
+    <div class="col-span-3 text-right font-bold">
+      <%= label f, :password %>
+    </div>
+    <div class="col-span-9">
+      <%= password_input f, :password, required: true, class: "w-1/3 px-2 p-1 border border-black rounded" %>
+    </div>
 
-  <%= label f, :remember_me, "Keep me logged in for 60 days" %>
-  <%= checkbox f, :remember_me %>
+    <div class="col-span-3"></div>
+    <div class="col-span-9">
+      <%= submit "Log in", class: "w-1/3 px-2 p-1 border border-black rounded bg-neutral-200 hover:bg-neutral-100" %>
+    </div>
 
-  <div>
-    <%= submit "Log in" %>
+    <div class="col-span-3"></div>
+    <div class="col-span-9 font-bold">
+      <%= checkbox f, :remember_me, class: "w-4 h-4" %>
+      <%= label f, :remember_me, "Keep me logged in", class: "font-normal" %>
+    </div>
   </div>
 </.form>
-
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-</p>

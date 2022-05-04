@@ -11,7 +11,7 @@ defmodule BlogWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ ">Log in</div>"
       assert response =~ "Register</a>"
     end
 
@@ -35,7 +35,6 @@ defmodule BlogWeb.UserSessionControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ user.username
-      assert response =~ "Settings</a>"
       assert response =~ "Log out</a>"
     end
 
@@ -74,7 +73,7 @@ defmodule BlogWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ ">Log in</div>"
       assert response =~ "Invalid username or password"
     end
   end
