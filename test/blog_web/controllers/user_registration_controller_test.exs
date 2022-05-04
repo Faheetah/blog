@@ -21,11 +21,11 @@ defmodule BlogWeb.UserRegistrationControllerTest do
   describe "POST /users/register" do
     @tag :capture_log
     test "creates account and logs the user in", %{conn: conn} do
-      email = unique_user_email()
+      username = unique_user_username()
 
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => valid_user_attributes(email: email)
+          "user" => valid_user_attributes(username: username)
         })
 
       assert get_session(conn, :user_token)
@@ -34,7 +34,7 @@ defmodule BlogWeb.UserRegistrationControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ email
+      assert response =~ username
       assert response =~ "Settings</a>"
       assert response =~ "Log out</a>"
     end
@@ -42,13 +42,13 @@ defmodule BlogWeb.UserRegistrationControllerTest do
     test "render errors for invalid data", %{conn: conn} do
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => %{"email" => "with spaces", "password" => "too short"}
+          "user" => %{"username" => "with spaces", "password" => "notlong"}
         })
 
       response = html_response(conn, 200)
       assert response =~ "<h1>Register</h1>"
-      assert response =~ "must have the @ sign and no spaces"
-      assert response =~ "should be at least 12 character"
+      assert response =~ "must be comprised of alphanumeric characters, dashes, and underscores"
+      assert response =~ "should be at least 8 character"
     end
   end
 end
