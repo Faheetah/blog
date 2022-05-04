@@ -48,7 +48,7 @@ defmodule Blog.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:credo, "~> 1.6", runtime: Mix.env() == :dev, only: :dev},
-      {:mix_test_watch, "~> 1.1.0", runtime: Mix.env() == :dev, only: :dev}
+      {:mix_test_watch, "~> 1.1.0", runtime: Mix.env() == :test, only: :dev}
     ]
   end
 
