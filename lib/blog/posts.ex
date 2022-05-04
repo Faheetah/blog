@@ -6,6 +6,7 @@ defmodule Blog.Posts do
   import Ecto.Query, warn: false
   alias Blog.Repo
   alias Blog.Posts.Post
+  alias Blog.Posts.PostTag
   alias Blog.Posts.Tag
 
   @doc """
@@ -25,8 +26,17 @@ defmodule Blog.Posts do
   Lists posts by tag.
   """
   def list_posts_for_tag(name) do
-    Repo.get_by(Tag, name: name)
-    |> Repo.preload(posts: [:tags])
+    Repo.all(
+      from t in Tag,
+      where: t.name == ^name,
+      join: pt in PostTag,
+      on: pt.tag_id == t.id,
+      join: p in Post,
+      on: pt.post_id == p.id,
+      order_by: [desc: p.inserted_at],
+      select: p
+    )
+    |> Repo.preload(:tags)
   end
 
   @doc """
@@ -110,7 +120,9 @@ defmodule Blog.Posts do
 
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
-    Post.changeset(post, attrs)
+    post
+    |> Repo.preload(:tags)
+    |> Post.changeset(attrs)
   end
 
   def insert_or_get_tags([]) do

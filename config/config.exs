@@ -8,6 +8,7 @@
 import Config
 
 config :blog,
+  title: "Blog",
   ecto_repos: [Blog.Repo]
 
 config :blog, Blog.Accounts,

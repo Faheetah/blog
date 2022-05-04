@@ -1,6 +1,6 @@
-<div class="text-4xl mb-4">Settings</div>
+<div class="text-2xl mb-4">Settings</div>
 
-<div class="text-2xl my-4">Change username</div>
+<div class="text-xl my-4">Change username</div>
 
 <.form let={f} for={@username_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_username">
   <%= if @username_changeset.action do %>
@@ -35,7 +35,7 @@
   </div>
 </.form>
 
-<div class="text-2xl my-4">Change password</div>
+<div class="text-xl my-4">Change password</div>
 
 <.form let={f} for={@password_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_password">
   <%= if @password_changeset.action do %>

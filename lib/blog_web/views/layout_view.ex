@@ -8,4 +8,8 @@ defmodule BlogWeb.LayoutView do
   def registration_enabled do
     Blog.Accounts.registration_enabled
   end
+
+  def fetch_title do
+    Application.fetch_env!(:blog, :title)
+  end
 end

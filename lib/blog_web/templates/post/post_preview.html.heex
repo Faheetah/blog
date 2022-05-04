@@ -1,20 +1,32 @@
 <div class="my-4">
   <div class="text-2xl font-bold">
-    <%= link @post.title, to: Routes.post_path(@conn, :show, @post) %>
+    <span class="text-2xl font-bold">
+      <%= link @post.title, to: Routes.post_path(@conn, :show, @post) %>
+    </span>
+
+    <%= if @current_user do %>
+      <span class="mx-2 text-lg font-thin text-neutral-400">
+        <%= link "edit", class: "hover:text-black", to: Routes.post_path(@conn, :edit, @post) %> |
+        <%= link "delete", class: "hover:text-black", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+      </span>
+    <% end %>
   </div>
+
   <div class="text-neutral-600">
     <%= format_datetime @post.inserted_at %>
   </div>
+
   <div class="text-neutral-600 mb-2">
     <%= format_tag_links @post.tags %>
   </div>
 
-  <div class="break-words">
-  <%= if @post.preview do %>
-    <%= @post.preview %> <span class="text-neutral-400">. . .</span>
-  <% else %>
-    <%= @post.content %>
-  <% end %>
+  <div class="mb-4 break-words">
+    <%= if @post.preview do %>
+      <%= raw @post.preview %> <span class="text-neutral-400">. . .</span>
+    <% else %>
+      <%= format_markdown @post.content %>
+    <% end %>
+
     <%= link "Read More", class: "text-neutral-400 hover:text-black font-bold", to: Routes.post_path(@conn, :show, @post) %>
   </div>
 </div>

@@ -17,7 +17,6 @@ defmodule Blog.Posts.Post do
 
   @doc false
   def changeset(post, attrs) do
-    IO.inspect attrs
     post
     |> cast(attrs, [:title, :content])
     |> validate_required([:title, :content])

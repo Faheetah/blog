@@ -1,21 +1,26 @@
-<div class="mb-4">
-  <span class="text-4xl"><%= @post.title %></span>
+<div class="my-4">
+  <div class="text-2xl font-bold">
+    <span class="text-2xl font-bold">
+      <%= @post.title %>
+    </span>
 
-  <%= if @current_user do %>
-  <span class="mx-2 text-neutral-400">
-    <%= link "edit", class: "hover:text-black", to: Routes.post_path(@conn, :edit, @post) %> |
-    <%= link "delete", class: "hover:text-black", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
-  </span>
-  <% end %>
-</div>
+    <%= if @current_user do %>
+      <span class="mx-2 text-lg font-thin text-neutral-400">
+        <%= link "edit", class: "hover:text-black", to: Routes.post_path(@conn, :edit, @post) %> |
+        <%= link "delete", class: "hover:text-black", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+      </span>
+    <% end %>
+  </div>
 
-<div class="text-neutral-600 mb-2">
-  <%= format_datetime @post.inserted_at %>
-</div>
-<div class="text-neutral-600 mb-2">
-  tags: <%= format_tags @post.tags %>
-</div>
+  <div class="text-neutral-600">
+    <%= format_datetime @post.inserted_at %>
+  </div>
 
-<div class="my-4 break-words">
-  <%= @post.content %>
+  <div class="text-neutral-600 mb-2">
+    <%= format_tag_links @post.tags %>
+  </div>
+
+  <div class="mb-4 break-words">
+    <%= format_markdown @post.content %>
+  </div>
 </div>
