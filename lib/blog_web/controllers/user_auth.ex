@@ -136,6 +136,20 @@ defmodule BlogWeb.UserAuth do
     end
   end
 
+  @doc """
+  Determintes whether registration is enabled site wide.
+  """
+  def registration_enabled(conn, _opts) do
+    if Blog.Accounts.registration_enabled do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Registration is disabled for this site.")
+      |> redirect(to: "/")
+      |> halt()
+    end
+  end
+
   defp maybe_store_return_to(%{method: "GET"} = conn) do
     put_session(conn, :user_return_to, current_path(conn))
   end

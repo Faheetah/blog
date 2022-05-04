@@ -10,6 +10,9 @@ import Config
 config :blog,
   ecto_repos: [Blog.Repo]
 
+config :blog, Blog.Accounts,
+  registration_enabled: true
+
 # Configures the endpoint
 config :blog, BlogWeb.Endpoint,
   url: [host: "localhost"],

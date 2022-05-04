@@ -63,6 +63,14 @@ defmodule Blog.Accounts do
   ## User registration
 
   @doc """
+  Whether registration is enabled site wide.
+  """
+  def registration_enabled() do
+    Application.fetch_env!(:blog, __MODULE__)
+    |> Keyword.get(:registration_enabled)
+  end
+
+  @doc """
   Registers a user.
 
   ## Examples

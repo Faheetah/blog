@@ -12,6 +12,12 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :blog, BlogWeb.Endpoint, server: true
 end
 
+# If REGISTRATION_ENABLED is "true" or "1", enable registration site wide
+if System.get_env("REGISTRATION_ENABLED") do
+  config :blog, Blog.Accounts,
+    registration_enabled: System.get_env("REGISTRATION_ENABLED") in ["true", "1"]
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
