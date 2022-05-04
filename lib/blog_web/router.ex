@@ -51,6 +51,7 @@ defmodule BlogWeb.Router do
 
     delete "/users/log_out", UserSessionController, :delete
     get "/posts", PostController, :index
+    get "/tags/:tag", PostController, :index_for_tag
     get "/posts/:id", PostController, :show
   end
 end

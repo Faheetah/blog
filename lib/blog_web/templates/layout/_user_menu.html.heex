@@ -3,15 +3,15 @@
 
   <div class="p-4 absolute top-0 right-0 text-neutral-400">
   <%= if @current_user do %>
-      <%= link @current_user.username, class: "hover:text-neutral-800", to: Routes.user_settings_path(@conn, :edit) %> |
-      <%= link "new post", class: "hover:text-neutral-800", to: Routes.post_path(@conn, :new) %> |
-      <%= link "log out", class: "hover:text-neutral-800", to: Routes.user_session_path(@conn, :delete), method: :delete %>
+      <%= link @current_user.username, class: "hover:text-black", to: Routes.user_settings_path(@conn, :edit) %> |
+      <%= link "new post", class: "hover:text-black", to: Routes.post_path(@conn, :new) %> |
+      <%= link "log out", class: "hover:text-black", to: Routes.user_session_path(@conn, :delete), method: :delete %>
   <% else %>
       <%= if registration_enabled do %>
-        <%= link "Register", class: "hover:text-neutral-800", to: Routes.user_registration_path(@conn, :new) %> |
+        <%= link "Register", class: "hover:text-black", to: Routes.user_registration_path(@conn, :new) %> |
       <% end %>
 
-      <%= link "Log in", class: "hover:text-neutral-800", to: Routes.user_session_path(@conn, :new) %>
+      <%= link "Log in", class: "hover:text-black", to: Routes.user_session_path(@conn, :new) %>
   <% end %>
   </div>
 </div>

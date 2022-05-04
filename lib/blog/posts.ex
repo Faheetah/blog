@@ -5,8 +5,8 @@ defmodule Blog.Posts do
 
   import Ecto.Query, warn: false
   alias Blog.Repo
-
   alias Blog.Posts.Post
+  alias Blog.Posts.Tag
 
   @doc """
   Returns the list of posts.
@@ -18,7 +18,15 @@ defmodule Blog.Posts do
 
   """
   def list_posts do
-    Repo.all(from p in Post, order_by: [desc: p.inserted_at])
+    Repo.all(from p in Post, order_by: [desc: p.inserted_at], preload: [:tags])
+  end
+
+  @doc """
+  Lists posts by tag.
+  """
+  def list_posts_for_tag(name) do
+    Repo.get_by(Tag, name: name)
+    |> Repo.preload(posts: [:tags])
   end
 
   @doc """
@@ -35,7 +43,10 @@ defmodule Blog.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Repo.get!(Post, id)
+    |> Repo.preload(:tags)
+  end
 
   @doc """
   Creates a post.
@@ -101,4 +112,20 @@ defmodule Blog.Posts do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
+  def insert_or_get_tags([]) do
+    []
+  end
+
+  def insert_or_get_tags(names) do
+    Repo.insert_all(
+      Tag,
+      Enum.map(names, &%{name: &1}),
+      on_conflict: :nothing
+    )
+
+    Repo.all(from t in Tag, where: t.name in ^names)
+  end
+
+
 end

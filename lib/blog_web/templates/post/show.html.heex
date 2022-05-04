@@ -9,6 +9,13 @@
   <% end %>
 </div>
 
+<div class="text-neutral-600 mb-2">
+  <%= format_datetime @post.inserted_at %>
+</div>
+<div class="text-neutral-600 mb-2">
+  tags: <%= format_tags @post.tags %>
+</div>
+
 <div class="my-4 break-words">
   <%= @post.content %>
 </div>
