@@ -1,0 +1,14 @@
+<div class="mb-4">
+  <span class="text-4xl"><%= @post.title %></span>
+
+  <%= if @current_user do %>
+  <span class="mx-2 text-neutral-400">
+    <%= link "edit", class: "hover:text-black", to: Routes.post_path(@conn, :edit, @post) %> |
+    <%= link "delete", class: "hover:text-black", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+  </span>
+  <% end %>
+</div>
+
+<div class="my-4 break-words">
+  <%= @post.content %>
+</div>

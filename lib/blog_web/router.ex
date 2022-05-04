@@ -20,13 +20,8 @@ defmodule BlogWeb.Router do
   scope "/", BlogWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PostController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", BlogWeb do
-  #   pipe_through :api
-  # end
 
   ## Authentication routes
 
@@ -44,11 +39,18 @@ defmodule BlogWeb.Router do
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
+    get "/posts/new", PostController, :new
+    post "/posts", PostController, :create
+    get "/posts/:id/edit", PostController, :edit
+    put "/posts/:id", PostController, :update
+    delete "/posts/:id", PostController, :delete
   end
 
   scope "/", BlogWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
+    get "/posts", PostController, :index
+    get "/posts/:id", PostController, :show
   end
 end
