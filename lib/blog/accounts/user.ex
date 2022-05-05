@@ -2,6 +2,8 @@ defmodule Blog.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Blog.Posts.Post
+
   @max_username_length 160
   @max_password_length 160
 
@@ -9,6 +11,7 @@ defmodule Blog.Accounts.User do
     field :username, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
+    has_many :posts, Post
 
     timestamps()
   end

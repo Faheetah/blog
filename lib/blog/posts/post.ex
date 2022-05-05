@@ -2,6 +2,7 @@ defmodule Blog.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Blog.Accounts.User
   alias Blog.Posts
   alias Blog.Posts.Tag
 
@@ -10,6 +11,7 @@ defmodule Blog.Posts.Post do
     field :preview, :string
     field :title, :string
     many_to_many :tags, Tag, join_through: "posts_tags", on_replace: :delete
+    belongs_to :user, User
     field :tag_list, :string, virtual: true
 
     timestamps()
@@ -18,7 +20,7 @@ defmodule Blog.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content])
+    |> cast(attrs, [:title, :content, :user_id])
     |> validate_required([:title, :content])
     |> generate_preview(attrs)
     |> trim_content(attrs)

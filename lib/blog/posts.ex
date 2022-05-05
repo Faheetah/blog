@@ -19,7 +19,7 @@ defmodule Blog.Posts do
 
   """
   def list_posts do
-    Repo.all(from p in Post, order_by: [desc: p.inserted_at], preload: [:tags])
+    Repo.all(from p in Post, order_by: [desc: p.inserted_at], preload: [:tags, :user])
   end
 
   @doc """
@@ -55,7 +55,7 @@ defmodule Blog.Posts do
   """
   def get_post!(id) do
     Repo.get!(Post, id)
-    |> Repo.preload(:tags)
+    |> Repo.preload([:tags, :user])
   end
 
   @doc """
