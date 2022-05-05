@@ -5,6 +5,8 @@ defmodule Blog.Posts do
 
   import Ecto.Query, warn: false
   alias Blog.Repo
+
+  alias Blog.Accounts.User
   alias Blog.Posts.Post
   alias Blog.Posts.PostTag
   alias Blog.Posts.Tag
@@ -36,7 +38,7 @@ defmodule Blog.Posts do
       order_by: [desc: p.inserted_at],
       select: p
     )
-    |> Repo.preload(:tags)
+    |> Repo.preload([:tags, :user])
   end
 
   @doc """

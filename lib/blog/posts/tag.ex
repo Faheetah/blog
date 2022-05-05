@@ -10,8 +10,8 @@ defmodule Blog.Posts.Tag do
   end
 
   @doc false
-  def changeset(post, attrs) do
-    post
+  def changeset(tag, attrs) do
+    tag
     |> cast(attrs, [:name])
     |> validate_required([:name])
   end
