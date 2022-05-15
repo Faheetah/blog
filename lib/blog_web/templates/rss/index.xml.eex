@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="<%= @url %><%= Routes.rss_path(@conn, :index) %>" rel="self" type="application/rss+xml" />
+    <title><%= @title %></title>
+    <link><%= @url %></link>
+    <description><%= @description %></description>
+    <lastBuildDate><%= format_datetime @last_build_date %></lastBuildDate>
+
+    <%= for post <- @posts do %>
+      <item>
+        <title>%{post.title}</title>
+        <description><%= post.preview %></description>
+        <pubDate><%= format_datetime post.inserted_at %></pubDate>
+        <link><%= @conn.scheme %>://<%= @conn.host %>:<%= @conn.port %><%= Routes.post_path(@conn, :show, post) %></link>
+      </item>
+    <% end %>
+  </channel>
+</rss>

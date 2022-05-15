@@ -54,4 +54,8 @@ defmodule BlogWeb.Router do
     get "/tags/:tag", PostController, :index_for_tag
     get "/posts/:id", PostController, :show
   end
+
+  scope "/", BlogWeb do
+    get "/rss", RSSController, :index
+  end
 end

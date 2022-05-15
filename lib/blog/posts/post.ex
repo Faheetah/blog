@@ -34,10 +34,22 @@ defmodule Blog.Posts.Post do
 
   # if preview is under 255 characters, then content will render instead
   # and preview will be null
-  defp generate_preview(post, %{"content" => <<preview::binary-size(255), _::binary>>}) do
+  defp generate_preview(post, %{"content" => content}) do
+    preview =
+      content
+      |> String.split("\n")
+      |> Enum.map(fn c -> String.strip(c, ?\r) end)
+      |> Enum.reject(fn c -> String.starts_with?(c, "#") || c == "" end)
+      |> hd
+      |> truncate_preview
+
     put_change(post, :preview, preview)
   end
-  defp generate_preview(post, _), do: post
+
+  defp truncate_preview(<<preview::binary-size(255), _::binary>>) do
+    preview
+  end
+  defp truncate_preview(content), do: content
 
   defp parse_tags(%{"tag_list" => tags}) do
     tags

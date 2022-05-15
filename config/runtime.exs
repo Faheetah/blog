@@ -11,6 +11,10 @@ if System.get_env("TITLE") do
   config :blog, title: System.get_env("TITLE")
 end
 
+if System.get_env("DESCRIPTION") do
+  config :blog, description: System.get_env("DESCRIPTION")
+end
+
 # Start the phoenix server if environment is set and running in a release
 if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :blog, BlogWeb.Endpoint, server: true
@@ -50,7 +54,7 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST")
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :blog, BlogWeb.Endpoint,

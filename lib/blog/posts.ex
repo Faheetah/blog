@@ -25,6 +25,13 @@ defmodule Blog.Posts do
   end
 
   @doc """
+  Returns a simple list of posts for RSS feeds.
+  """
+  def list_rss_posts do
+    Repo.all(from p in Post, order_by: [desc: p.inserted_at])
+  end
+
+  @doc """
   Lists posts by tag.
   """
   def list_posts_for_tag(name) do

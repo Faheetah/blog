@@ -9,6 +9,7 @@ import Config
 
 config :blog,
   title: "Blog",
+  description: "Blog description",
   ecto_repos: [Blog.Repo]
 
 config :blog, Blog.Accounts,
