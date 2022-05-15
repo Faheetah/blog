@@ -45,6 +45,7 @@ defmodule Blog.Posts.Post do
 
     put_change(post, :preview, preview)
   end
+  defp generate_preview(post, %{}), do: post
 
   defp truncate_preview(<<preview::binary-size(255), _::binary>>) do
     preview
