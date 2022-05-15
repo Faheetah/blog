@@ -9,7 +9,7 @@
 
     <%= for post <- @posts do %>
       <item>
-        <title>%{post.title}</title>
+        <title><%= post.title %></title>
         <description><%= post.preview %></description>
         <pubDate><%= format_datetime post.inserted_at %></pubDate>
         <link><%= @conn.scheme %>://<%= @conn.host %>:<%= @conn.port %><%= Routes.post_path(@conn, :show, post) %></link>
