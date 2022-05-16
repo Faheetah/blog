@@ -11,6 +11,7 @@ defmodule BlogWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug :put_title
   end
 
   pipeline :api do
@@ -57,5 +58,9 @@ defmodule BlogWeb.Router do
 
   scope "/", BlogWeb do
     get "/rss", RSSController, :index
+  end
+
+  def put_title(conn, _params) do
+    assign(conn, :title, Application.fetch_env!(:blog, :title))
   end
 end
