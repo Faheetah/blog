@@ -5,7 +5,7 @@ defmodule Blog.Posts.PostTag do
   alias Blog.Posts.Tag
 
   schema "posts_tags" do
-    belongs_to :posts, Post
-    belongs_to :tags, Tag
+    belongs_to :post, Post
+    belongs_to :tag, Tag
   end
 end

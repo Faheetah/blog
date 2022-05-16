@@ -38,7 +38,7 @@ defmodule Blog.Posts.Post do
     preview =
       content
       |> String.split("\n")
-      |> Enum.map(fn c -> String.strip(c, ?\r) end)
+      |> Enum.map(fn c -> String.trim_trailing(c, "\r") end)
       |> Enum.reject(fn c -> String.starts_with?(c, "#") || c == "" end)
       |> hd
       |> truncate_preview
