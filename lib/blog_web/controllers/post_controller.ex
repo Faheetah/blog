@@ -31,19 +31,19 @@ defmodule BlogWeb.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    post = Posts.get_post!(id)
+  def show(conn, %{"slug" => slug}) do
+    post = Posts.get_post_by_slug!(slug)
     render(conn, "show.html", post: post)
   end
 
-  def edit(conn, %{"id" => id}) do
-    post = Posts.get_post!(id)
+  def edit(conn, %{"slug" => slug}) do
+    post = Posts.get_post_by_slug!(slug)
     changeset = Posts.change_post(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Posts.get_post!(id)
+  def update(conn, %{"slug" => slug, "post" => post_params}) do
+    post = Posts.get_post_by_slug!(slug)
 
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
@@ -56,8 +56,8 @@ defmodule BlogWeb.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    post = Posts.get_post!(id)
+  def delete(conn, %{"slug" => slug}) do
+    post = Posts.get_post_by_slug!(slug)
     {:ok, _post} = Posts.delete_post(post)
 
     conn

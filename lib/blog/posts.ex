@@ -52,18 +52,19 @@ defmodule Blog.Posts do
   Gets a single post.
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
-
-  ## Examples
-
-      iex> get_post!(123)
-      %Post{}
-
-      iex> get_post!(456)
-      ** (Ecto.NoResultsError)
-
   """
   def get_post!(id) do
     Repo.get!(Post, id)
+    |> Repo.preload([:tags, :user])
+  end
+
+  @doc """
+  Get a post by slug.
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+  """
+  def get_post_by_slug!(slug) do
+    Repo.get_by!(Post, slug: slug)
     |> Repo.preload([:tags, :user])
   end
 

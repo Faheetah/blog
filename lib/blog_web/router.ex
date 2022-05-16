@@ -42,9 +42,9 @@ defmodule BlogWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/posts/new", PostController, :new
     post "/posts", PostController, :create
-    get "/posts/:id/edit", PostController, :edit
-    put "/posts/:id", PostController, :update
-    delete "/posts/:id", PostController, :delete
+    get "/posts/:slug/edit", PostController, :edit
+    put "/posts/:slug", PostController, :update
+    delete "/posts/:slug", PostController, :delete
   end
 
   scope "/", BlogWeb do
@@ -53,7 +53,7 @@ defmodule BlogWeb.Router do
     delete "/users/log_out", UserSessionController, :delete
     get "/posts", PostController, :index
     get "/tags/:tag", PostController, :index_for_tag
-    get "/posts/:id", PostController, :show
+    get "/posts/:slug", PostController, :show
   end
 
   scope "/", BlogWeb do
