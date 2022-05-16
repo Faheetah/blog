@@ -1,7 +1,7 @@
 <div class="text-center p-4">
   <div class="mb-2 text-4xl font-thin"><%= link fetch_title(), to: "/" %></div>
 
-  <div class="p-4 absolute top-0 right-0 text-neutral-400">
+  <div class="md:p-4 md:absolute top-0 right-0 text-neutral-400">
   <%= if @current_user do %>
     <%= link @current_user.username, class: "hover:text-black", to: Routes.user_settings_path(@conn, :edit) %> |
     <%= link "new post", class: "hover:text-black", to: Routes.post_path(@conn, :new) %> |
