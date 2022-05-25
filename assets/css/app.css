@@ -144,3 +144,7 @@ li {
   list-style-position: inside;
   padding-left: 2em;
 }
+
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+  padding: 0;
+}

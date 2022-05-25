@@ -1,4 +1,8 @@
-<div class="text-2xl"><%= @title %></div>
+<%= if tag = Map.get(@conn.assigns, :tag) do %>
+  <div class="text-center text-2xl">
+  Posts tagged with <span class="text-violet-700 font-bold"><%= @tag %></span>
+  </div>
+<% end %>
 
 <%= for post <- @posts do %>
   <%= render("post_preview.html", conn: @conn, post: post, current_user: @current_user) %>

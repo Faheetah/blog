@@ -72,6 +72,7 @@ defmodule Blog.Posts.Post do
     tags
     |> String.split(",")
     |> Enum.map(&String.trim/1)
+    |> Enum.map(&String.downcase/1)
     |> Enum.reject(& &1 == "")
     |> Posts.insert_or_get_tags()
   end

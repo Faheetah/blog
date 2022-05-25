@@ -6,12 +6,13 @@ defmodule BlogWeb.PostController do
 
   def index(conn, _params) do
     posts = Posts.list_posts()
-    render(conn, "index.html", posts: posts, title: "")
+    render(conn, "index.html", posts: posts)
   end
 
   def index_for_tag(conn, %{"tag" => name}) do
-    posts = Posts.list_posts_for_tag(name)
-    render(conn, "index.html", posts: posts, title: "Listing posts for tag #{name}")
+    tag = String.downcase(name)
+    posts = Posts.list_posts_for_tag(tag)
+    render(conn, "index.html", posts: posts, tag: tag)
   end
 
   def new(conn, _params) do

@@ -8,11 +8,4 @@ defmodule Blog.Posts.Tag do
     field :name, :string
     many_to_many :posts, Post, join_through: "posts_tags", on_replace: :delete
   end
-
-  @doc false
-  def changeset(tag, attrs) do
-    tag
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
-  end
 end

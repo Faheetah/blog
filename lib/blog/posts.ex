@@ -35,9 +35,11 @@ defmodule Blog.Posts do
   Lists posts by tag.
   """
   def list_posts_for_tag(name) do
+    downcased = String.downcase(name)
+
     Repo.all(
       from t in Tag,
-      where: t.name == ^name,
+      where: t.name == ^downcased,
       join: pt in PostTag,
       on: pt.tag_id == t.id,
       join: p in Post,
