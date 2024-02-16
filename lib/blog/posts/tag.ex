@@ -1,6 +1,5 @@
 defmodule Blog.Posts.Tag do
   use Ecto.Schema
-  import Ecto.Changeset
 
   alias Blog.Posts.Post
 

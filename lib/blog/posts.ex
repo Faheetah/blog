@@ -6,7 +6,6 @@ defmodule Blog.Posts do
   import Ecto.Query, warn: false
   alias Blog.Repo
 
-  alias Blog.Accounts.User
   alias Blog.Posts.Post
   alias Blog.Posts.PostTag
   alias Blog.Posts.Tag

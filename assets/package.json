@@ -1,10 +1,10 @@
 {
-  "dependencies": {
+  "scripts": {
+    "deploy": "NODE_ENV=production tailwindcss --postcss --minify --input=css/app.css --output=../priv/static/assets/app.css"
+  },
+  "devDependencies": {
     "tailwindcss": "^3.0.21",
     "tailwindcss/typography": "0.5.2",
     "highlightjs": "11.5.1"
-  },
-  "scripts": {
-    "deploy": "NODE_ENV=production tailwindcss --postcss --minify --input=css/app.css --output=../priv/static/assets/app.css"
   }
 }

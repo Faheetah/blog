@@ -1,0 +1,24 @@
+version: '2'
+services:
+  postgres:
+    image: 'postgres:13'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=blog
+  blog:
+    build:
+      context: .
+    command: /app/bin/server
+    environment:
+      - DATABASE_URL=ecto://postgres:postgres@postgres/blog
+      - SECRET_KEY_BASE=8t3gh9g398h493fut3hg93hg9hpu9gshauoghpejivfjiahu349th98pt349h34ur9823ur9832ur98u3298ru3298ur89u32ru98328ru329ur93u9832ur9832r8932ur9832ur9832u98ru3298ur9832u98r32
+      - BLOG_HOST=localhost
+      - PORT=4000
+    ports:
+      - 4000:4000
+    links:
+      - postgres
+    depends_on:
+      - postgres
